@@ -2,6 +2,7 @@
 
 // TODO:
 // 0. Loading, empty list and error messages
+// 0. Splash screen
 // 1. Close icon for search field
 // 2. New design
 // 3. Hide map controls
