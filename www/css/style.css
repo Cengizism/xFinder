@@ -1,1 +1,21 @@
-/* Empty. Add your own CSS if you like */
+.search-bar {
+
+}
+
+.search-bar .query {
+    width: 65%;
+    float: left
+}
+
+.search-bar .item-select {
+    width: 35%;
+    height: 47px;
+}
+
+.search-bar .item-select {
+}
+
+.search-bar .item-select select {
+    width: 100%;
+    max-width: 100%;
+}

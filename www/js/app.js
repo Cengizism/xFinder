@@ -1,4 +1,6 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+'use strict';
+
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngResource'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -49,4 +51,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     $urlRouterProvider.otherwise('/tab/locations');
 
+  })
+
+  .constant('$config', {
+    // host: 'http://still-atoll-8938.herokuapp.com/api/locations',
+    host: 'https://desolate-sierra-8522.herokuapp.com/locations',
+    navigator: {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    }
   });
