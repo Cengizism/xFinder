@@ -61,4 +61,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       timeout: 5000,
       maximumAge: 0
     }
+  })
+
+  .filter('capitalize', function () {
+    return function (input) {
+      if (input != null)
+        input = input.toLowerCase();
+      return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
   });

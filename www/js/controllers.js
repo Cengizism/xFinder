@@ -3,8 +3,8 @@
 angular.module('starter.controllers', [])
 
   .controller('LocationsCtrl', [
-    '$scope', 'Chats', 'Location',
-    function ($scope, Chats, Location) {
+    '$rootScope', '$scope', 'Chats', 'Location',
+    function ($rootScope, $scope, Chats, Location) {
       // With the new view caching in Ionic, Controllers are only called
       // when they are recreated or on app start, instead of every page change.
       // To listen for when this page is active (for example, to refresh data),
@@ -12,8 +12,6 @@ angular.module('starter.controllers', [])
       //
       //$scope.$on('$ionicView.enter', function(e) {
       //});
-
-      $scope.chats = Chats.all();
 
       Location.detect().then(function (position) {
         console.log('position', position);
@@ -39,10 +37,8 @@ angular.module('starter.controllers', [])
       });
 
 
-
-
-      $scope.types = ['cities', 'streets', 'stations', 'places'];
-      $scope.type = 'stations';
+      $scope.types = ['Cities', 'Streets', 'Stations', 'Places'];
+      $scope.type = 'Stations';
 
       $scope.list = null;
 
@@ -72,19 +68,19 @@ angular.module('starter.controllers', [])
 
             Location.feed({
               q: query,
-              type: type
-            }).then(function (list) {
-              console.log('list:', list);
+              type: type.toLowerCase()
+            }).then(function (results) {
+              console.log('list:', results);
 
               $scope.loading = false;
 
-              if (list.error) {
+              if (results.error) {
                 $scope.failed.status = true;
               }
 
-              console.log('list', list);
+              console.log('list', results);
 
-              $scope.list = list.locations;
+              $rootScope.results = results.locations;
             }, function (err) {
               $scope.failed.status = true;
               $scope.failed.message = 'Server responded with: ' + err;
@@ -97,8 +93,8 @@ angular.module('starter.controllers', [])
 
     }])
 
-  .controller('LocationDetailCtrl', function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
+  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams) {
+    $scope.location = $rootScope.results[$stateParams.locationId];
   })
 
   .controller('SettingsCtrl', function ($scope) {
