@@ -1,7 +1,6 @@
 <ion-view view-title="Locations">
     <ion-content>
         <ion-list>
-
             <ion-item class="search-bar">
                 <label class="item item-input query">
                     <i class="icon ion-search placeholder-icon"></i>
@@ -10,18 +9,15 @@
                            ng-model="query"
                            ng-change="search(query, type)">
                 </label>
-
                 <label class="item item-input item-select">
                     <select ng-model="type" ng-options="type for type in types"
                             ng-change="search(query, type)"></select>
                 </label>
             </ion-item>
-
             <ion-item class="item-remove-animate item-avatar item-icon-right"
                       ng-repeat="result in results"
                       type="item-text-wrap"
                       href="#/tab/locations/{{$index}}">
-
                 <img ng-src="https://cdn4.iconfinder.com/data/icons/e-commerce-5/512/Location_Detailed-3-512.png">
 
                 <h2>{{result.name}}</h2>
@@ -29,7 +25,6 @@
                 <p>{{result.type | capitalize}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
-
         </ion-list>
     </ion-content>
 </ion-view>
