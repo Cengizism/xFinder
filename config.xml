@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.xfinder587516" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>xfinder</name>
+  <name>xFinder</name>
   <description>
-        An Ionic Framework and Cordova project.
+        An Ionic Framework and Cordova project for X assessment.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="ulusoy.cengiz@gmail.com" href="http://cengizism.com/">
+      Cengiz Ulusoy
     </author>
   <content src="index.html"/>
   <access origin="*"/>

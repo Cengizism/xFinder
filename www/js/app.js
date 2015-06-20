@@ -1,12 +1,33 @@
 'use strict';
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngResource'])
+angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', 'ngResource'])
 
-  .run(function ($ionicPlatform) {
+  .constant('$config', {
+    host: 'https://desolate-sierra-8522.herokuapp.com/locations', // 'http://still-atoll-8938.herokuapp.com/api/locations'
+    delay: 500,
+    navigator: {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    },
+    map: {
+      zoom: 16
+    }
+  })
+
+  .run(function ($rootScope, $ionicPlatform, Location) {
+    Location.detect().then(function (position) {
+      console.log('Fetching user position was successful. Coordinates are (', position.coords.latitude, ',', position.coords.longitude, '). More or less ' + position.coords.accuracy + ' meters.');
+      $rootScope.position = position;
+    }, function (err) {
+      console.error('Fetching user location is failed!', err);
+    });
+
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
+
       if (window.StatusBar) {
         StatusBar.styleLightContent();
       }
@@ -38,7 +59,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           }
         }
       })
-
       .state('tab.settings', {
         url: '/settings',
         views: {
@@ -50,23 +70,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       });
 
     $urlRouterProvider.otherwise('/tab/locations');
-
-  })
-
-  .constant('$config', {
-    // host: 'http://still-atoll-8938.herokuapp.com/api/locations',
-    host: 'https://desolate-sierra-8522.herokuapp.com/locations',
-    navigator: {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    }
   })
 
   .filter('capitalize', function () {
     return function (input) {
-      if (input != null)
+      if (input !== null) {
         input = input.toLowerCase();
+      }
+
       return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
   });
