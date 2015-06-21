@@ -45,7 +45,7 @@ angular.module('xFinder.controllers', [])
     };
   })
 
-  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile) {
+  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile, Location) {
     $scope.location = $rootScope.results[$stateParams.locationId];
 
     //$scope.loading = $ionicLoading.show({
@@ -88,7 +88,7 @@ angular.module('xFinder.controllers', [])
 
     map.fitBounds(bounds);
 
-    console.log('distance', Location.distance(markers[0].latitude, markers[0].longitude, markers[1].latitude, markers[1].longitude));
+    console.log('distance', Math.round(Location.distance(markers[0].latitude, markers[0].longitude, markers[1].latitude, markers[1].longitude)) );
 
   })
 
