@@ -11,6 +11,7 @@ angular.module('xFinder.controllers', [])
     var failed = function () {
       $scope.alert = {
         status: true,
+        loading: false,
         message: 'Search failed! Please refine your query!'
       };
     };
@@ -19,6 +20,7 @@ angular.module('xFinder.controllers', [])
 
     $scope.alert = {
       status: false,
+      loading: true,
       message: ''
     };
 
@@ -32,6 +34,7 @@ angular.module('xFinder.controllers', [])
       if (query.length > 3) {
         $scope.alert = {
           status: true,
+          loading: true,
           message: 'Loading some results..'
         };
 

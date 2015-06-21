@@ -14,15 +14,22 @@
                 </label>
             </ion-item>
 
-            <ion-item ng-show="alert.status">{{alert.message}}</ion-item>
+            <ion-item ng-show="alert.status" class="message">
+                <i class="icon ion-refresh" ng-hide="alert.loading"></i>
+                <div class="la-ball-clip-rotate la-dark la-sm" ng-show="alert.loading">
+                    <div></div>
+                </div>
+                {{alert.message}}
+            </ion-item>
 
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-hide="alert.status"
+            <ion-item class="item-remove-animate item-avatar item-icon-right"
+                      ng-hide="alert.status" ng-show="(results.length > 0) && (query.length > 3)"
                       ng-repeat="result in results" type="item-text-wrap" href="#/tab/locations/{{$index}}">
                 <img ng-src="img/icon-location-found.png">
 
                 <h2>{{result.name}}</h2>
 
-                <p>{{result.type | capitalize}}, {{result.distance}} km</p>
+                <p>{{result.type | capitalize}}<span ng-show="result.distance">, {{result.distance}} km</span></p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
 

@@ -36,12 +36,18 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
   })
 
   .run(function ($rootScope, $ionicPlatform, Location) {
-    Location.detect().then(function (position) {
-      console.log('Fetching user position was successful. Coordinates are (', position.coords.latitude, ',', position.coords.longitude, '). More or less ' + position.coords.accuracy + ' meters.');
-      $rootScope.position = position;
-    }, function (err) {
-      console.error('Fetching user location is failed!', err);
-    });
+    $rootScope.position = null;
+
+    var detect = function () {
+      Location.detect().then(function (position) {
+        console.log('Fetching user position was successful. Coordinates are (', position.coords.latitude, ',', position.coords.longitude, '). More or less ' + position.coords.accuracy + ' meters.');
+        $rootScope.position = position;
+      }, function (err) {
+        console.error('Fetching user location is failed!', err);
+        detect();
+      });
+    };
+    detect();
 
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

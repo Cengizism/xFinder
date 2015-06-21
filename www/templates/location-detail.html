@@ -1,5 +1,17 @@
 <ion-view view-title="{{location.name}}">
     <ion-content>
         <div id="map" data-tap-disabled="true"></div>
+        <div id="map-info" class="bar bar-footer">
+            <div class="badge">
+                <i class="icon ion-android-arrow-up"></i>
+            </div>
+            <img ng-src="img/icon-location-found.png">
+
+            <div class="details">
+                <h2>{{location.name}}</h2>
+
+                <p>{{location.type | capitalize}}<span ng-show="location.distance">, {{location.distance}} km</span></p>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

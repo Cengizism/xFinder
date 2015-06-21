@@ -43,9 +43,11 @@ angular.module('xFinder.services', [])
       var deferred = $q.defer();
 
       Location.query(query, function (results) {
-          angular.forEach(results.locations, function (location) {
-            location.distance = Math.round(Location.prototype.distance($rootScope.position.coords.latitude, $rootScope.position.coords.longitude, location.lat, location.lng));
-          });
+          if ($rootScope.position !== null) {
+            angular.forEach(results.locations, function (location) {
+              location.distance = Math.round(Location.prototype.distance($rootScope.position.coords.latitude, $rootScope.position.coords.longitude, location.lat, location.lng));
+            });
+          }
 
           deferred.resolve(results);
         }, function (err) {
