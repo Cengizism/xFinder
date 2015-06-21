@@ -25,30 +25,24 @@ angular.module('xFinder.services', [])
       return deferred.promise;
     };
 
-    Location.prototype.distance = function (lat1, lon1, lat2, lon2) {
-
-      function deg2rad(deg) {
+    Location.prototype.distance = function (latitude1, longitude1, latitude2, longitude2) {
+      var deg2rad = function (deg) {
         return deg * (Math.PI / 180)
-      }
+      };
 
-      var R = 6371; // Radius of the earth in km
-      var dLat = deg2rad(lat2 - lat1);  // deg2rad below
-      var dLon = deg2rad(lon2 - lon1);
-      var a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      var d = R * c; // Distance in km
-      return d;
+      var R = 6371,
+        dLatitude = deg2rad(latitude2 - latitude1),
+        dLongitude = deg2rad(longitude2 - longitude1);
 
+      var a = (Math.sin(dLatitude / 2) * Math.sin(dLatitude / 2)) + (Math.cos(deg2rad(latitude1)) * Math.cos(deg2rad(latitude2)) * Math.sin(dLongitude / 2) * Math.sin(dLongitude / 2));
+
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
     };
 
     Location.prototype.feed = function (query) {
       var deferred = $q.defer();
 
       Location.query(query, function (results) {
-
           angular.forEach(results.locations, function (location) {
             location.distance = Math.round(Location.prototype.distance($rootScope.position.coords.latitude, $rootScope.position.coords.longitude, location.lat, location.lng));
           });

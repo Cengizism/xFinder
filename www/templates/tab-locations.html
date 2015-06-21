@@ -4,9 +4,7 @@
             <ion-item class="search-bar">
                 <label class="item item-input query">
                     <i class="icon ion-search placeholder-icon"></i>
-                    <input type="text"
-                           placeholder="Search location in"
-                           ng-model="query"
+                    <input type="text" placeholder="Search location in" ng-model="query"
                            ng-change="search(query, type)">
                 </label>
                 <i ng-click="reset()" class="icon ion-close" ng-show="query.length > 3"></i>
@@ -18,17 +16,13 @@
 
             <ion-item ng-show="alert.status">{{alert.message}}</ion-item>
 
-            <ion-item class="item-remove-animate item-avatar item-icon-right"
-                      ng-hide="alert.status"
-                      ng-repeat="result in results"
-                      type="item-text-wrap"
-                      href="#/tab/locations/{{$index}}">
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-hide="alert.status"
+                      ng-repeat="result in results" type="item-text-wrap" href="#/tab/locations/{{$index}}">
                 <img ng-src="https://cdn4.iconfinder.com/data/icons/e-commerce-5/512/Location_Detailed-3-512.png">
 
                 <h2>{{result.name}}</h2>
 
-                <!--<p>{{result.type | capitalize}}</p>-->
-                <p>{{result.distance}} km</p>
+                <p>{{result.type | capitalize}}, {{result.distance}} km</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
 
