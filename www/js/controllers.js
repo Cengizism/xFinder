@@ -6,8 +6,6 @@ angular.module('xFinder.controllers', [])
     $scope.types = ['Cities', 'Streets', 'Stations', 'Places'];
     $scope.type = 'Stations';
 
-    $scope.loading = false;
-
     var timeout;
 
     var failed = function () {
@@ -25,10 +23,7 @@ angular.module('xFinder.controllers', [])
     };
 
     $scope.reset = function () {
-      console.log('reset!');
       $window.location.reload();
-      // $scope.query = '';
-      // $scope.results = [];
     };
 
     $scope.search = function (query, type) {
