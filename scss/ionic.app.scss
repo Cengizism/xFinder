@@ -1,11 +1,5 @@
-$light: #fff !default;
-$stable: #f8f8f8 !default;
-$positive: #4a87ee !default;
-$calm: #43cee6 !default;
-$balanced: #66cc33 !default;
-$energized: #f0b840 !default;
-$assertive: #ef4e3a !default;
-$royal: #8a6de9 !default;
+$light: #f9f6ed !default;
+$stable: #6a225e !default;
 $dark: #444 !default;
 
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
@@ -15,6 +9,22 @@ $font-family-serif: Georgia, "Times New Roman", Times, serif !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 @import "www/lib/ionic/scss/ionic";
+
+.bar {
+  border: none !important;
+}
+
+.pane {
+  background-color: $light;
+}
+
+.title, .tabs-bottom a, .back-button {
+  color: white !important;
+}
+
+select {
+  color: #aaa !important;
+}
 
 .search-bar {
   position: relative;
