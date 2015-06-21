@@ -2,57 +2,67 @@
 
 angular.module('xFinder.controllers', [])
 
-  .controller('LocationsCtrl', function ($rootScope, $scope, $config, Location) {
+  .controller('LocationsCtrl', function ($rootScope, $scope, $timeout, $config, $window, Location) {
     $scope.types = ['Cities', 'Streets', 'Stations', 'Places'];
     $scope.type = 'Stations';
 
-    $scope.failed = {
+    $scope.loading = false;
+
+    var timeout;
+
+    var failed = function () {
+      $scope.alert = {
+        status: true,
+        message: 'Search failed! Please refine your query!'
+      };
+    };
+
+    $scope.query = '';
+
+    $scope.alert = {
       status: false,
       message: ''
     };
 
-    $scope.loading = false;
-
-    $scope.q = '';
-
-    var timeout;
+    $scope.reset = function () {
+      console.log('reset!');
+      $window.location.reload();
+      // $scope.query = '';
+      // $scope.results = [];
+    };
 
     $scope.search = function (query, type) {
-      $scope.failed.status = false;
+      $scope.alert.status = false;
 
       if (query.length > 3) {
+        $scope.alert = {
+          status: true,
+          message: 'Loading some results..'
+        };
+
         if (timeout) {
           clearTimeout(timeout);
         }
 
         timeout = setTimeout(function () {
-          $scope.loading = true;
-
           Location.feed({q: query, type: type.toLowerCase()}).then(function (results) {
-            $scope.loading = false;
+            $scope.alert.status = false;
 
             if (results.error) {
-              $scope.failed.status = true;
+              failed();
             }
 
             $rootScope.results = results.locations;
-          }, function (err) {
-            $scope.failed.status = true;
-            $scope.failed.message = 'Server responded with: ' + err;
+          }, function () {
+            failed();
           });
         }, $config.delay);
       }
     };
   })
 
-  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile, Location) {
+  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile, $config, Location) {
     $scope.location = $rootScope.results[$stateParams.locationId];
-
-    //$scope.loading = $ionicLoading.show({
-    //  content: 'Getting current location...',
-    //  showBackdrop: false
-    //});
-    //$scope.loading.hide();
 
     var markers = [
       {
@@ -68,7 +78,7 @@ angular.module('xFinder.controllers', [])
     ];
 
     var bounds = new google.maps.LatLngBounds(),
-      map = new google.maps.Map(document.getElementById('map'), {mapTypeId: google.maps.MapTypeId.ROADMAP});
+      map = new google.maps.Map(document.getElementById('map'), angular.extend($config.map, {mapTypeId: google.maps.MapTypeId.ROADMAP}));
 
     angular.forEach(markers, function (marker) {
       marker.obj = new google.maps.Marker({
@@ -88,8 +98,7 @@ angular.module('xFinder.controllers', [])
 
     map.fitBounds(bounds);
 
-    console.log('distance', Math.round(Location.distance(markers[0].latitude, markers[0].longitude, markers[1].latitude, markers[1].longitude)) );
-
+    // console.log('distance', Math.round(Location.distance(markers[0].latitude, markers[0].longitude, markers[1].latitude, markers[1].longitude)));
   })
 
   .controller('SettingsCtrl', function ($rootScope, $scope) {

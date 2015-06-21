@@ -1,18 +1,18 @@
 'use strict';
 
 // TODO:
-// 0. Loading, empty list and error messages
-// 0. Splash screen
-// 1. Close icon for search field
+// OK 0. Loading, empty list and error messages
+// DEP 0. Splash screen
+// OK 1. Close icon for search field
 // 2. New design
-// 3. Hide map controls
+// OK 3. Hide map controls
 // 4. Different icons for markers
 // 5. Padding issues for search and select
 // 6. Plain front-end version
 // 7. Code commenting
 // 8. Unit tests
 // 9. e2e tests
-// 10. If there are more results, show 'more results..'
+// DEP 10. If there are more results, show 'more results..'
 
 angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', 'ngResource'])
 
@@ -25,7 +25,8 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
       maximumAge: 0
     },
     map: {
-      zoom: 16
+      zoom: 16,
+      disableDefaultUI: true
     }
   })
 

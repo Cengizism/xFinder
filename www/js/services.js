@@ -51,7 +51,6 @@ angular.module('xFinder.services', [])
 
           angular.forEach(results.locations, function (location) {
             location.distance = Math.round(Location.prototype.distance($rootScope.position.coords.latitude, $rootScope.position.coords.longitude, location.lat, location.lng));
-            console.log(location.name, location.distance);
           });
 
           deferred.resolve(results);
