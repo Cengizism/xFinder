@@ -79,7 +79,8 @@ angular.module('xFinder.controllers', [])
       marker.obj = new google.maps.Marker({
         position: new google.maps.LatLng(marker.latitude, marker.longitude),
         map: map,
-        title: marker.title
+        title: marker.title,
+        icon: 'img/icon-marker.png'
       });
 
       bounds.extend(marker.obj.position);
@@ -98,6 +99,6 @@ angular.module('xFinder.controllers', [])
 
   .controller('SettingsCtrl', function ($rootScope, $scope) {
     $scope.settings = {
-      enableFriends: false
+      enableFriends: true
     };
   });
