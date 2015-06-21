@@ -98,6 +98,6 @@ angular.module('xFinder.controllers', [])
 
   .controller('SettingsCtrl', function ($rootScope, $scope) {
     $scope.settings = {
-      enableFriends: true
+      enableFriends: false
     };
   });

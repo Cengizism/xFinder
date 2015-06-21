@@ -24,6 +24,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 select {
   color: #aaa !important;
+  background-color: white !important;
 }
 
 .search-bar {
@@ -33,6 +34,7 @@ select {
     width: 65%;
     float: left;
     z-index: 9;
+    background-color: white !important;
   }
 
   i.ion-close {

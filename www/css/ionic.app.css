@@ -7669,14 +7669,16 @@ a.button {
   color: white !important; }
 
 select {
-  color: #aaa !important; }
+  color: #aaa !important;
+  background-color: white !important; }
 
 .search-bar {
   position: relative; }
   .search-bar .query {
     width: 65%;
     float: left;
-    z-index: 9; }
+    z-index: 9;
+    background-color: white !important; }
   .search-bar i.ion-close {
     position: absolute;
     top: 32px;
