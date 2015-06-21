@@ -124,29 +124,26 @@ select {
   height: 100%;
 }
 
-.la-ball-clip-rotate {
+.rotating {
   position: relative;
-}
 
-.la-ball-clip-rotate > div {
-  position: relative;
-  box-sizing: content-box;
-  color: #fff;
-  background: #fff;
-  border: 0 solid #fff;
-}
+  > div {
+    position: relative;
+    box-sizing: content-box;
+    color: #444;
+    background: #444;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    border: 1px solid #444;
+  }
 
-.la-ball-clip-rotate:after {
-  display: table;
-  line-height: 0;
-  clear: both;
-  content: "";
-}
-
-.la-ball-clip-rotate.la-dark > div {
-  color: #444;
-  background: #444;
-  border-color: #444;
+  &:after {
+    display: table;
+    line-height: 0;
+    clear: both;
+    content: "";
+  }
 }
 
 @keyframes ball-clip-rotate {
@@ -161,59 +158,23 @@ select {
   }
 }
 
-.la-ball-clip-rotate {
+.rotating {
   width: 32px;
   height: 32px;
   float: left;
   margin: 0 10px 0 0;
-}
 
-.la-ball-clip-rotate > div {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  float: left;
-  background: transparent !important;
-  border-style: solid;
-  border-width: 2px;
-  border-bottom-color: transparent !important;
-  border-radius: 100%;
-  animation: ball-clip-rotate .75s linear infinite;
-}
-
-.la-ball-clip-rotate.la-sm {
-  width: 16px;
-  height: 16px;
-}
-
-.la-ball-clip-rotate.la-sm > div {
-  width: 14px;
-  height: 14px;
-  margin: 0;
-  border-width: 1px;
-}
-
-.la-ball-clip-rotate.la-lg {
-  width: 48px;
-  height: 48px;
-}
-
-.la-ball-clip-rotate.la-lg > div {
-  width: 42px;
-  height: 42px;
-  margin: 0;
-  border-width: 3px;
-}
-
-.la-ball-clip-rotate.la-2x {
-  width: 64px;
-  height: 64px;
-}
-
-.la-ball-clip-rotate.la-2x > div {
-  width: 56px;
-  height: 56px;
-  margin: 0;
-  border-width: 4px;
+  > div {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    float: left;
+    background: transparent !important;
+    border-style: solid;
+    border-width: 2px;
+    border-bottom-color: transparent !important;
+    border-radius: 100%;
+    animation: ball-clip-rotate .75s linear infinite;
+  }
 }
