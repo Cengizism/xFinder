@@ -7,7 +7,6 @@
                     <input type="text" placeholder="Search location in" ng-model="query"
                            ng-change="search(query, type)">
                 </label>
-                <i ng-click="reset()" class="icon ion-close" ng-show="query.length > 3"></i>
                 <label class="item item-input item-select">
                     <select ng-model="type" ng-options="type for type in types"
                             ng-change="search(query, type)"></select>
@@ -16,6 +15,7 @@
 
             <ion-item ng-show="alert.status" class="message">
                 <i class="icon ion-refresh" ng-hide="alert.loading"></i>
+
                 <div class="rotating" ng-show="alert.loading">
                     <div></div>
                 </div>

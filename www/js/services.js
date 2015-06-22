@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('xFinder.services', [])
-  .factory('Location', function ($rootScope, $resource, $q, $config) {
+  .factory('Location', function ($rootScope, $resource, $q) {
+
     var Location = $resource(
-      $config.host + '/:type',
+      'https://desolate-sierra-8522.herokuapp.com/locations' + '/:type',
       {},
       {
         query: {
@@ -20,7 +21,11 @@ angular.module('xFinder.services', [])
         deferred.resolve(position);
       }, function error(err) {
         deferred.reject(err);
-      }, $config.navigator);
+      }, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      });
 
       return deferred.promise;
     };

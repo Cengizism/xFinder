@@ -2,7 +2,7 @@
 
 angular.module('xFinder.controllers', [])
 
-  .controller('LocationsCtrl', function ($rootScope, $scope, $timeout, $config, $window, Location) {
+  .controller('LocationsCtrl', function ($rootScope, $scope, Location) {
     $scope.types = ['Cities', 'Streets', 'Stations', 'Places'];
     $scope.type = 'Stations';
 
@@ -22,10 +22,6 @@ angular.module('xFinder.controllers', [])
       status: false,
       loading: true,
       message: ''
-    };
-
-    $scope.reset = function () {
-      $window.location.reload();
     };
 
     $scope.search = function (query, type) {
@@ -54,12 +50,12 @@ angular.module('xFinder.controllers', [])
           }, function () {
             failed();
           });
-        }, $config.delay);
+        }, 500);
       }
     };
   })
 
-  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile, $config, Location) {
+  .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $ionicLoading, $compile) {
     $scope.location = $rootScope.results[$stateParams.locationId];
 
     var markers = [
@@ -76,7 +72,31 @@ angular.module('xFinder.controllers', [])
     ];
 
     var bounds = new google.maps.LatLngBounds(),
-      map = new google.maps.Map(document.getElementById('map'), angular.extend($config.map, {mapTypeId: google.maps.MapTypeId.ROADMAP}));
+      map = new google.maps.Map(document.getElementById('map'),
+        {
+          zoom: 16,
+          disableDefaultUI: true,
+          styles: [{
+            'featureType': 'landscape',
+            'stylers': [{'hue': '#FFBB00'}, {'saturation': 43.400000000000006}, {'lightness': 37.599999999999994}, {'gamma': 1}]
+          }, {
+            'featureType': 'road.highway',
+            'stylers': [{'hue': '#FFC200'}, {'saturation': -61.8}, {'lightness': 45.599999999999994}, {'gamma': 1}]
+          }, {
+            'featureType': 'road.arterial',
+            'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 51.19999999999999}, {'gamma': 1}]
+          }, {
+            'featureType': 'road.local',
+            'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 52}, {'gamma': 1}]
+          }, {
+            'featureType': 'water',
+            'stylers': [{'hue': '#0078FF'}, {'saturation': -13.200000000000003}, {'lightness': 2.4000000000000057}, {'gamma': 1}]
+          }, {
+            'featureType': 'poi',
+            'stylers': [{'hue': '#00FF6A'}, {'saturation': -1.0989010989011234}, {'lightness': 11.200000000000017}, {'gamma': 1}]
+          }],
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 
     angular.forEach(markers, function (marker) {
       marker.obj = new google.maps.Marker({
@@ -96,8 +116,6 @@ angular.module('xFinder.controllers', [])
     });
 
     map.fitBounds(bounds);
-
-    // console.log('distance', Math.round(Location.distance(markers[0].latitude, markers[0].longitude, markers[1].latitude, markers[1].longitude)));
   })
 
   .controller('SettingsCtrl', function ($rootScope, $scope) {
