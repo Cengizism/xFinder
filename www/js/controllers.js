@@ -14,11 +14,11 @@ angular.module('xFinder.controllers', [])
     $scope.type = 'Stations';
 
     // Create a general failed function for alert messages
-    var failed = function () {
+    var failed = function (message) {
       $scope.alert = {
         status: true,
         loading: false,
-        message: 'Search failed! Please refine your query!'
+        message: message
       };
     };
 
@@ -61,7 +61,11 @@ angular.module('xFinder.controllers', [])
             $scope.alert.status = false;
 
             if (results.error) {
-              failed();
+              failed('Search failed! Please refine your query!');
+            }
+
+            if (results.notFound) {
+              failed('No results found!');
             }
 
             // Set the results in the view container
