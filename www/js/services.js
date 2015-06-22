@@ -39,16 +39,16 @@ angular.module('xFinder.services', [])
         dLatitude = deg2rad(latitude2 - latitude1),
         dLongitude = deg2rad(longitude2 - longitude1);
 
-      var a = (Math.sin(dLatitude / 2) * Math.sin(dLatitude / 2)) + (Math.cos(deg2rad(latitude1)) * Math.cos(deg2rad(latitude2)) * Math.sin(dLongitude / 2) * Math.sin(dLongitude / 2));
+      var d = (Math.sin(dLatitude / 2) * Math.sin(dLatitude / 2)) + (Math.cos(deg2rad(latitude1)) * Math.cos(deg2rad(latitude2)) * Math.sin(dLongitude / 2) * Math.sin(dLongitude / 2));
 
-      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+      return R * (2 * Math.atan2(Math.sqrt(d), Math.sqrt(1 - d)));
     };
 
     Location.prototype.feed = function (query) {
       var deferred = $q.defer();
 
       Location.query(query, function (results) {
-          if ($rootScope.position !== null) {
+          if ($rootScope.position !== undefined) {
             angular.forEach(results.locations, function (location) {
               location.distance = Math.round(Location.prototype.distance($rootScope.position.coords.latitude, $rootScope.position.coords.longitude, location.lat, location.lng));
             });

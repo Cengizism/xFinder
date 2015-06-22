@@ -1,14 +1,12 @@
 describe('Locations Controller', function () {
-  var scope;
-  var Location;
+  var scope, Location, httpBackend;
 
-  beforeEach(module('ngResource'));
-  beforeEach(module('xFinder.controllers'));
-  beforeEach(module('xFinder.services'));
+  beforeEach(module('ngResource', 'xFinder.controllers', 'xFinder.services'));
 
-  beforeEach(inject(function ($rootScope, $controller, _Location_) {
+  beforeEach(inject(function ($rootScope, $controller, _Location_, _$httpBackend_) {
     scope = $rootScope.$new();
     Location = _Location_;
+    httpBackend = _$httpBackend_;
     $controller('LocationsCtrl', {$scope: scope});
   }));
 
@@ -34,5 +32,12 @@ describe('Locations Controller', function () {
     expect(scope.alert).toEqual(alert);
   });
 
-  // Test search fn
+  // TODO: Complete this!
+  it('should make a search query', function () {
+    //httpBackend.whenGET('https://desolate-sierra-8522.herokuapp.com/locations/stations?q=utrecht').respond(DATA);
+    //scope.search('utrecht', 'stations');
+    //expect(scope.results.length).toEqual(9);
+    //httpBackend.flush();
+    expect(true).toEqual(true);
+  });
 });

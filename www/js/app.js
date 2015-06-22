@@ -12,7 +12,7 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
         StatusBar.styleLightContent();
       }
 
-      $rootScope.position = null;
+      $rootScope.position = undefined;
 
       var detect = function () {
         Location.detect().then(function (position) {
