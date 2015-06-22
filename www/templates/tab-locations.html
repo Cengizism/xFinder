@@ -21,7 +21,7 @@
             </ion-item>
 
             <ion-item class="item-remove-animate item-avatar item-icon-right"
-                      ng-hide="alert.status" ng-show="(results.length > 0) && (query.length > 3)"
+                      ng-hide="alert.status" ng-show="results.length > 0"
                       ng-repeat="result in results" type="item-text-wrap" href="#/tab/locations/{{$index}}">
                 <img ng-src="img/icon-location-found.png">
 

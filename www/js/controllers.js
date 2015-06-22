@@ -32,6 +32,9 @@ angular.module('xFinder.controllers', [])
       message: ''
     };
 
+    // Create results container
+    $rootScope.results = [];
+
     /**
      * Make search queries in backend.
      */
@@ -74,6 +77,8 @@ angular.module('xFinder.controllers', [])
             failed();
           });
         }, 500);
+      } else {
+        $rootScope.results = [];
       }
     };
   })
