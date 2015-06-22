@@ -16,10 +16,8 @@
             <ion-item ng-show="alert.status" class="message">
                 <i class="icon ion-refresh" ng-hide="alert.loading"></i>
 
-                <div class="rotating" ng-show="alert.loading">
-                    <div></div>
-                </div>
-                {{alert.message}}
+                <img ng-show="alert.loading" ng-src="img/loading.gif">
+                <span>{{alert.message}}</span>
             </ion-item>
 
             <ion-item class="item-remove-animate item-avatar item-icon-right"

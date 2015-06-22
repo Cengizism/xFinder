@@ -31,6 +31,13 @@ select {
   border-bottom: none !important;
   font-size: 16px;
 
+  img {
+    float: left;
+    width: 24px;
+    height: 24px;
+    margin: -3px 5px 0 0;
+  }
+
   i {
     font-size: 18px;
   }
@@ -122,61 +129,4 @@ select {
 
 .scroll {
   height: 100%;
-}
-
-.rotating {
-  position: relative;
-
-  > div {
-    position: relative;
-    box-sizing: content-box;
-    color: #444;
-    background: #444;
-    width: 14px;
-    height: 14px;
-    margin: 0;
-    border: 1px solid #444;
-  }
-
-  &:after {
-    display: table;
-    line-height: 0;
-    clear: both;
-    content: "";
-  }
-}
-
-@keyframes ball-clip-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(180deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.rotating {
-  width: 32px;
-  height: 32px;
-  float: left;
-  margin: 0 10px 0 0;
-
-  > div {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin: 0;
-    float: left;
-    background: transparent !important;
-    border-style: solid;
-    border-width: 2px;
-    border-bottom-color: transparent !important;
-    border-radius: 100%;
-    animation: ball-clip-rotate .75s linear infinite;
-  }
 }
