@@ -1,16 +1,10 @@
 'use strict';
 
-/**
- * Services module.
- */
+// Services module.
 angular.module('xFinder.services', [])
 
 /**
  * Location service.
- *
- * @param {!angular.$rootScope} $rootScope
- * @param {!$resource} $resource
- * @param {!$q} $q
  */
   .factory('Location', function ($rootScope, $resource, $q) {
     // Setup Location resource with RESTful methods and endpoints

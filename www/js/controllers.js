@@ -1,16 +1,10 @@
 'use strict';
 
-/**
- * Controllers module.
- */
+// Controllers module.
 angular.module('xFinder.controllers', [])
 
 /**
  * Locations controller.
- *
- * @param {!angular.$rootScope} $rootScope
- * @param {!angular.$scope} $scope
- * @param {!xFinder.services} Location
  */
   .controller('LocationsCtrl', function ($rootScope, $scope, Location) {
     // Define query types
@@ -40,9 +34,6 @@ angular.module('xFinder.controllers', [])
 
     /**
      * Make search queries in backend.
-     *
-     * @param {string} query
-     * @param {string} type
      */
     $scope.search = function (query, type) {
       // Turn off alerting at search beginning
@@ -85,11 +76,6 @@ angular.module('xFinder.controllers', [])
 
 /**
  * Locations detail controller.
- *
- * @param {!angular.$rootScope} $rootScope
- * @param {!angular.$scope} $scope
- * @param {!$stateParams} $stateParams
- * @param {!$compile} $compile
  */
   .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $compile) {
     // Create markers list
@@ -170,9 +156,6 @@ angular.module('xFinder.controllers', [])
 
 /**
  * Settings controller.
- *
- * @param {!angular.$rootScope} $rootScope
- * @param {!angular.$scope} $scope
  */
   .controller('SettingsCtrl', function ($rootScope, $scope) {
     $scope.settings = {

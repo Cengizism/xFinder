@@ -1,16 +1,10 @@
 'use strict';
 
-/**
- * Main angular application definition.
- */
+// Main angular application definition.
 angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', 'ngResource'])
 
 /**
  * Application controller.
- *
- * @param {!angular.$rootScope} $rootScope
- * @param {!angular.$scope} $scope
- * @param {!xFinder.services} Location
  */
   .run(function ($rootScope, $ionicPlatform, Location) {
     $ionicPlatform.ready(function () {
@@ -39,9 +33,6 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
 
 /**
  * State machine definitions with controllers & templates.
- *
- * @param {!$stateProvider} $stateProvider
- * @param {!$urlRouterProvider} $urlRouterProvider
  */
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -89,13 +80,14 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
     $urlRouterProvider.otherwise('/tab/locations');
   })
 
-/**
- * Some handy filters.
- *
- * @param {string} input
- * @return {string}
- */
+  // Some handy filter for capitalizing the first letter
   .filter('capitalize', function () {
+    /**
+     * Some handy filters.
+     *
+     * @param {string} input
+     * @return {string}
+     */
     return function (input) {
       if (input !== null) {
         input = input.toLowerCase();
