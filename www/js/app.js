@@ -1,6 +1,8 @@
 'use strict';
 
-// Main angular application definition
+/**
+ * Main angular application definition.
+ */
 angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', 'ngResource'])
 
 /**
@@ -88,7 +90,7 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
   })
 
 /**
- * Some handy filters
+ * Some handy filters.
  *
  * @param {string} input
  * @return {string}

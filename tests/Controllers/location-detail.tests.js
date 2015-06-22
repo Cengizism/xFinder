@@ -21,6 +21,4 @@ describe('Location Detail Controller', function () {
 
     expect(DATA.locations[0]).toEqual(location);
   });
-
-  // How to test map functions?
 });

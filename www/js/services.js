@@ -1,6 +1,8 @@
 'use strict';
 
-// Services module.
+/**
+ * Services module.
+ */
 angular.module('xFinder.services', [])
 
 /**

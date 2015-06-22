@@ -1,6 +1,8 @@
 'use strict';
 
-// Controllers module.
+/**
+ * Controllers module.
+ */
 angular.module('xFinder.controllers', [])
 
 /**
@@ -90,19 +92,19 @@ angular.module('xFinder.controllers', [])
  * @param {!$compile} $compile
  */
   .controller('LocationDetailCtrl', function ($rootScope, $scope, $stateParams, $compile) {
+    // Create markers list
+    var markers = [];
+
     // Grab the location based on the passed index
     if ($stateParams.locationId) {
       $scope.location = $rootScope.results[$stateParams.locationId];
-    }
 
-    // Create markers list
-    var markers = [
-      {
+      markers.push({
         title: $scope.location.name,
         latitude: $scope.location.lat,
         longitude: $scope.location.lng
-      }
-    ];
+      });
+    }
 
     // Insert user location into the markers array if the geo-location is present
     if ($rootScope.position !== undefined) {
@@ -114,54 +116,56 @@ angular.module('xFinder.controllers', [])
     }
 
     // Start initializing Google Maps
-    var bounds = new google.maps.LatLngBounds(),
-      map = new google.maps.Map(document.getElementById('map'),
-        {
-          zoom: 16,
-          disableDefaultUI: true,
-          styles: [{
-            'featureType': 'landscape',
-            'stylers': [{'hue': '#FFBB00'}, {'saturation': 43.400000000000006}, {'lightness': 37.599999999999994}, {'gamma': 1}]
-          }, {
-            'featureType': 'road.highway',
-            'stylers': [{'hue': '#FFC200'}, {'saturation': -61.8}, {'lightness': 45.599999999999994}, {'gamma': 1}]
-          }, {
-            'featureType': 'road.arterial',
-            'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 51.19999999999999}, {'gamma': 1}]
-          }, {
-            'featureType': 'road.local',
-            'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 52}, {'gamma': 1}]
-          }, {
-            'featureType': 'water',
-            'stylers': [{'hue': '#0078FF'}, {'saturation': -13.200000000000003}, {'lightness': 2.4000000000000057}, {'gamma': 1}]
-          }, {
-            'featureType': 'poi',
-            'stylers': [{'hue': '#00FF6A'}, {'saturation': -1.0989010989011234}, {'lightness': 11.200000000000017}, {'gamma': 1}]
-          }],
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+    if (markers.length > 0) {
+      var bounds = new google.maps.LatLngBounds(),
+        map = new google.maps.Map(document.getElementById('map'),
+          {
+            zoom: 16,
+            disableDefaultUI: true,
+            styles: [{
+              'featureType': 'landscape',
+              'stylers': [{'hue': '#FFBB00'}, {'saturation': 43.400000000000006}, {'lightness': 37.599999999999994}, {'gamma': 1}]
+            }, {
+              'featureType': 'road.highway',
+              'stylers': [{'hue': '#FFC200'}, {'saturation': -61.8}, {'lightness': 45.599999999999994}, {'gamma': 1}]
+            }, {
+              'featureType': 'road.arterial',
+              'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 51.19999999999999}, {'gamma': 1}]
+            }, {
+              'featureType': 'road.local',
+              'stylers': [{'hue': '#FF0300'}, {'saturation': -100}, {'lightness': 52}, {'gamma': 1}]
+            }, {
+              'featureType': 'water',
+              'stylers': [{'hue': '#0078FF'}, {'saturation': -13.200000000000003}, {'lightness': 2.4000000000000057}, {'gamma': 1}]
+            }, {
+              'featureType': 'poi',
+              'stylers': [{'hue': '#00FF6A'}, {'saturation': -1.0989010989011234}, {'lightness': 11.200000000000017}, {'gamma': 1}]
+            }],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+
+      // Iterate markers list for creating marker objects in the map and determining the bounds
+      angular.forEach(markers, function (marker) {
+        marker.obj = new google.maps.Marker({
+          position: new google.maps.LatLng(marker.latitude, marker.longitude),
+          map: map,
+          title: marker.title,
+          icon: 'img/icon-marker.png'
         });
 
-    // Iterate markers list for creating marker objects in the map and determining the bounds
-    angular.forEach(markers, function (marker) {
-      marker.obj = new google.maps.Marker({
-        position: new google.maps.LatLng(marker.latitude, marker.longitude),
-        map: map,
-        title: marker.title,
-        icon: 'img/icon-marker.png'
+        bounds.extend(marker.obj.position);
+
+        marker.window = new google.maps.InfoWindow({content: $compile('<div>' + marker.title + '</div>')($scope)[0]});
+
+        // Add some click listeners for the pop-ups
+        google.maps.event.addListener(marker.obj, 'click', function () {
+          marker.window.open(map, marker.obj);
+        });
       });
 
-      bounds.extend(marker.obj.position);
-
-      marker.window = new google.maps.InfoWindow({content: $compile('<div>' + marker.title + '</div>')($scope)[0]});
-
-      // Add some click listeners for the pop-ups
-      google.maps.event.addListener(marker.obj, 'click', function () {
-        marker.window.open(map, marker.obj);
-      });
-    });
-
-    // Lay the markers in the window comfortably
-    map.fitBounds(bounds);
+      // Lay the markers in the window comfortably
+      map.fitBounds(bounds);
+    }
   })
 
 /**
