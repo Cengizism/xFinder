@@ -6,7 +6,7 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
 /**
  * Application controller.
  */
-  .run(function ($rootScope, $ionicPlatform, Location) {
+  .run(function ($rootScope, $ionicPlatform) {
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -16,15 +16,22 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
         StatusBar.styleLightContent();
       }
 
+      // Set position to undefined as default
       $rootScope.position = undefined;
 
+      // Start detecting user location
       var detect = function () {
-        Location.detect().then(function (position) {
+        // Use browsers geo-locator for location
+        navigator.geolocation.getCurrentPosition(function (position) {
           console.log('Fetching user position was successful. Coordinates are (', position.coords.latitude, ',', position.coords.longitude, '). More or less ' + position.coords.accuracy + ' meters.');
           $rootScope.position = position;
-        }, function (err) {
+        }, function error(err) {
           console.error('Fetching user location is failed!', err);
           detect();
+        }, {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
         });
       };
       detect();

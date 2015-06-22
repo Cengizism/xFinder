@@ -7,7 +7,7 @@ angular.module('xFinder.services', [])
  * Location service.
  */
   .factory('Location', function ($rootScope, $resource, $q) {
-    // Setup Location resource with RESTful methods and endpoints
+    // Setup Location resource with REST-ful endpoints and methods
     var Location = $resource(
       'https://desolate-sierra-8522.herokuapp.com/locations' + '/:type',
       {},
@@ -18,28 +18,6 @@ angular.module('xFinder.services', [])
         }
       }
     );
-
-    /**
-     * Detect user geo-location.
-     *
-     * @return {object}
-     */
-    Location.prototype.detect = function () {
-      var deferred = $q.defer();
-
-      // Use browsers geo-locator for location
-      navigator.geolocation.getCurrentPosition(function (position) {
-        deferred.resolve(position);
-      }, function error(err) {
-        deferred.reject(err);
-      }, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      });
-
-      return deferred.promise;
-    };
 
     /**
      * Calculate approx. the distance between two coordinates.
