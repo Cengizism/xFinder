@@ -1,7 +1,15 @@
 'use strict';
 
+// Main angular application definition
 angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', 'ngResource'])
 
+/**
+ * Application controller.
+ *
+ * @param {!angular.$rootScope} $rootScope
+ * @param {!angular.$scope} $scope
+ * @param {!xFinder.services} Location
+ */
   .run(function ($rootScope, $ionicPlatform, Location) {
     $ionicPlatform.ready(function () {
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -27,13 +35,22 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
     });
   })
 
+/**
+ * State machine definitions with controllers & templates.
+ *
+ * @param {!$stateProvider} $stateProvider
+ * @param {!$urlRouterProvider} $urlRouterProvider
+ */
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
+      // Load tabs
       .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
       })
+
+      // Locations
       .state('tab.locations', {
         url: '/locations',
         views: {
@@ -43,6 +60,8 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
           }
         }
       })
+
+      // Location detail
       .state('tab.location-detail', {
         url: '/locations/:locationId',
         views: {
@@ -52,6 +71,8 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
           }
         }
       })
+
+      // Settings
       .state('tab.settings', {
         url: '/settings',
         views: {
@@ -62,9 +83,16 @@ angular.module('xFinder', ['ionic', 'xFinder.controllers', 'xFinder.services', '
         }
       });
 
+    // Route fallback
     $urlRouterProvider.otherwise('/tab/locations');
   })
 
+/**
+ * Some handy filters
+ *
+ * @param {string} input
+ * @return {string}
+ */
   .filter('capitalize', function () {
     return function (input) {
       if (input !== null) {
