@@ -97,7 +97,8 @@ angular.module('xFinder.controllers', [])
       markers.push({
         title: $scope.location.name,
         latitude: $scope.location.lat,
-        longitude: $scope.location.lng
+        longitude: $scope.location.lng,
+        icon: 'img/icon-marker.png'
       });
     }
 
@@ -106,7 +107,8 @@ angular.module('xFinder.controllers', [])
       markers.unshift({
         title: 'You are here!',
         latitude: $rootScope.position.coords.latitude,
-        longitude: $rootScope.position.coords.longitude
+        longitude: $rootScope.position.coords.longitude,
+        icon: 'img/icon-marker-home.png'
       });
     }
 
@@ -145,7 +147,7 @@ angular.module('xFinder.controllers', [])
           position: new google.maps.LatLng(marker.latitude, marker.longitude),
           map: map,
           title: marker.title,
-          icon: 'img/icon-marker.png'
+          icon: marker.icon
         });
 
         bounds.extend(marker.obj.position);
